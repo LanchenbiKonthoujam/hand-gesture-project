@@ -25,3 +25,32 @@ function speak(){
     var utterThis = new SpeechSynthesisUtterance(speak_data);
     synth.speak(utterThis);
 }
+function check(){
+    img = document.getElementById("image_captured");
+    classifier.classify(img, gotResults);
+}
+function gotResults(error, results){
+    if(error){
+        console.error(error);
+    }
+    else{
+        document.getElementById("result_gesture_name").innerHTML = results[0].label;
+        prediction = results[0].label;
+        speak();
+        if(result[0].label == "Amazing")
+        {
+            document.getElementById("result_emoji").innerHTML = '&#128076;';
+            document.getElementById("quote").innerHTML = "This Is Looking Amazing";
+        }
+        else if(result[0].label == "Best")
+        {
+            document.getElementById("result_emoji").innerHTML = '&#128077;';
+            document.getElementById("quote").innerHTML = "All The Best";
+        }
+        else
+        {
+            document.getElementById("result_emoji").innerHTML = '&#9996;';
+            document.getElementById("quote").innerHTML = "That Was A Marvelous Victory";
+        }
+    }
+}
